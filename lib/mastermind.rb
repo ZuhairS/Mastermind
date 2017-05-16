@@ -65,4 +65,37 @@ end
 
 class Game
   attr_reader :secret_code
+
+  def initialize(secret_code = Code.random)
+    @secret_code = secret_code
+  end
+
+  def get_guess
+    print "\nEnter your guess (eg: RBOO, gbpy)"
+    guess = gets.chomp
+    Code.parse(guess)
+  end
+
+  def display_matches(code)
+    puts "\n\nYou exact matches: #{secret_code.exact_matches(code)}"
+    puts "Your near matches: #{secret_code.near_matches(code)}"
+  end
+
+  def play
+    puts "Welcome to Mastermind: The Game"
+    puts "\nColor Choices: Red, Green, Blue, Yellow, Orange, Purple\n"
+    guess = get_guess
+    display_matches(guess)
+    until secret_code.exact_matches(guess) == 4
+      guess = get_guess
+      display_matches(guess)
+    end
+    puts "Congrats! You are a true Mastermind! ;)"
+  end
+
+end
+
+if __FILE__ == $PROGRAM_NAME
+  new_game = Game.new
+  new_game.play
 end
