@@ -71,7 +71,7 @@ class Game
   end
 
   def get_guess
-    print "\nEnter your guess (eg: RBOO, gbpy)"
+    print "\nEnter your guess (eg: RBOO, gbpy): "
     guess = gets.chomp
     Code.parse(guess)
   end
